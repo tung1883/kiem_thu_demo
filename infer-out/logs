@@ -1,0 +1,50 @@
+[1647][      debug] Loading models took 25.219ms
+[1648][      debug] Sqlite write daemon: starting up
+[1648][      debug] Sqlite write daemon: set up complete, waiting for connections
+[1647][environment] CWD = /home/tung1883/tung1883/Nuke
+[1647][environment] No .inferconfig file found
+[1647][environment] Project root = /home/tung1883/tung1883/Nuke
+[1647][environment] INFER_ARGS =   @/tmp/args.tmp.f306af
+[1647][environment] command line arguments:   /home/tung1883/tung1883/infer-linux64-v1.1.0/bin/infer
+[1647][environment]                           run --force-integration make -- sudo make install
+[1647][environment] Available memory at startup: 11291 MB
+[1647][environment] Active checkers: self-in-block (C/C++/ObjC), starvation (C/C++/ObjC, Java), uninit (C/C++/ObjC), siof (C/C++/ObjC), dotnet-resource-leak (C#/.Net), racerd (C/C++/ObjC, Java), liveness (C/C++/ObjC), inefficient-keyset-iterator (Java), fragment-retains-view (Java), biabduction (C/C++/ObjC, Java, C#/.Net)
+[1647][environment] Scheduler: file
+[1647][environment] Cores used: 6
+[1647][environment] Infer version v1.1.0
+[1647][environment] Copyright 2009 - present Facebook. All Rights Reserved.
+[1647][environment] 
+[1647][   progress] Capturing in make/cc mode...
+[1647][environment] Running command sudo with env:
+[1647][environment] (Extend((PATH"/home/tung1883/tung1883/infer-linux64-v1.1.0/lib/infer/infer/bin/../lib/wrappers:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Microsoft/jdk-17.0.10.7-hotspot/bin:/mnt/c/Windows/System32:/mnt/c/windows/System32/Wbem:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files/Java/jdk-21:/mnt/c/Program Files/Java/jdk-21/bin:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/nodejs/:/mnt/c/mingw64/bin:/mnt/c/Program Files (x86)/MySQL/mysql-8.0.32-winx64/bin:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/Tung/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Program Files/Java/jdk-21/bin:/mnt/c/Program Files/HP/HP One Agent:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/Program Files/R/R-4.3.3/bin:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/Tung/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Tung/AppData/Local/GitHubDesktop/bin:/snap/bin")(INFER_OLD_PATH"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Microsoft/jdk-17.0.10.7-hotspot/bin:/mnt/c/Windows/System32:/mnt/c/windows/System32/Wbem:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files/Java/jdk-21:/mnt/c/Program Files/Java/jdk-21/bin:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/nodejs/:/mnt/c/mingw64/bin:/mnt/c/Program Files (x86)/MySQL/mysql-8.0.32-winx64/bin:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/Tung/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Program Files/Java/jdk-21/bin:/mnt/c/Program Files/HP/HP One Agent:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/Program Files/R/R-4.3.3/bin:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/Tung/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/Tung/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Tung/AppData/Local/GitHubDesktop/bin:/snap/bin")))
+[1647][environment] 
+[1647][      debug] GC stats for capture:
+[1647][      debug]   minor_words: 2312
+[1647][      debug]   promoted_words: 0
+[1647][      debug]   major_words: 1131
+[1647][      debug]   minor_collections: 0
+[1647][      debug]   major_collections: 0
+[1647][      debug]   compactions: 0
+[1647][      debug]   top_heap_words: 760832
+[1647][      debug]   
+[1647][  user warn] Nothing to compile. Try running `sudo clean` first.
+[1647][   progress] There was nothing to analyze.
+[1647][      debug] GC stats for report:
+[1647][      debug]   minor_words: 2082
+[1647][      debug]   promoted_words: 0
+[1647][      debug]   major_words: 0
+[1647][      debug]   minor_collections: 0
+[1647][      debug]   major_collections: 0
+[1647][      debug]   compactions: 0
+[1647][      debug]   top_heap_words: 760832
+[1647][      debug]   
+[1647][      debug] GC stats for main_process_full:
+[1647][      debug]   minor_words: 1.66273e+06
+[1647][      debug]   promoted_words: 167680
+[1647][      debug]   major_words: 694852
+[1647][      debug]   minor_collections: 14
+[1647][      debug]   major_collections: 4
+[1647][      debug]   compactions: 1
+[1647][      debug]   top_heap_words: 760832
+[1647][      debug]   
+[1648][      debug] Sqlite write daemon: terminating
