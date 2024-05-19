@@ -1,52 +1,6 @@
-<img src="img/Nuke.png" alt="Nuke Logo" width=200 height=200/>
-
-# Nuke
-
-Nuke is a program that can be used to destroy the contents of a given
-drive. It zeroes out a given drive and writes random bytes for further
-data destruction.
-
-```
-Usage: nuke <drive 1> [drive 2] ...
-
-Destroy the contents of a drive/drives.
-
-Options:
-    -z, -0, --zero    Don't write random bytes to drive
-    -n, --repeat      Number of times to repeat the process (defaults to 1)
-    -Y                Don't ask for confirmation (NOT RECOMMENDED)
-    -h, --help        Display this help and exit
-    -V, --version     Display version information and exit
-
-Examples:
-    nuke /dev/sdb
-    nuke /dev/sdb /dev/sdc
-    nuke -z /dev/sdb
-    nuke -n 2 /dev/sdb
-
-NOTE: This program requires root privileges to run.
-```
-
-## Requirements
-
-1. GCC
-2. GNU Make
-3. PyQt5 (for the GUI front-end)
-
-## Build
-
-NOTE: At the moment, Nuke can only be installed and run on Linux.
-
-* Download the source tree and change to the source directory.
-
-* Run `make` if you only want the command-line utility.
-
-* To compile the front-end, run `make ui`.
-
-## Install
-
-Run `sudo make install` to make and install Nuke.
-
-## Uninstall
-
-Run `sudo make uninstall` to uninstall Nuke.
+Demo công cụ Infer
+- Infer là một công cụ kiểm thử tĩnh và sẽ rất hữu ích trong việc tự động hóa quá trình phát hiện bug
+- Trong bản demo này, chúng em thử cài đặt cho Infer để nó có thể phát hiện bug trong quá trình phát triển, cũng như tạo ra các bản report báo cáo cho developer
+- Các công việc cụ thể bọn em làm như sau: 
+1. Chúng em viết ra 1 bản script để chạy Infer. Ta chỉ cần việc chạy file script và ấn các số từ 1 -> 5 để lựa chọn các hành động của Infer như: phân tích branch hiện tại, so sánh với branch main, xem các bản report.
+2. Tạo branch mới và thêm phần lỗi bị sai vào code để chạy thử Infer. Việc này cũng giống như mình gặp phải bug trong quá trình phát triển. Qua đó, mình thấy được Infer có thể giúp gì trong quá trình này

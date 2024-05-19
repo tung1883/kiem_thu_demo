@@ -1,0 +1,43 @@
+#0
+src/cache.c:28: error: Resource Leak
+  resource of type `_IO_FILE` acquired by call to `fopen()` at line 6, column 18 is not released after line 28, column 5.
+  26. 
+  27.     // Read file content into buffer
+  28.     size_t bytes_read = fread(content, 1, file_size, file);
+          ^
+  29.     content[bytes_read] = '\0'; // Null-terminate the string
+  30. 
+
+#1
+src/main.c:35: error: Resource Leak
+  resource of type `_IO_FILE` acquired by call to `fopen()` at line 27, column 18 is not released after line 35, column 12.
+  33. 
+  34.     char c;
+  35.     while ((c = fgetc(file)) != EOF)
+                 ^
+  36.     {
+  37.         putchar(c);
+
+#2
+src/main.c:318: error: Resource Leak
+  resource of type `_IO_FILE` acquired to `return` by call to `fopen()` at line 51, column 18 is not released after line 318, column 5.
+  316.     }
+  317. 
+  318.     return 0;
+           ^
+  319. }
+
+#3
+src/main.c:311: error: Uninitialized Value
+  The value read from result was never initialized.
+  309.             if (choice >= 1 && choice <= 34) {
+  310.                 fprintf(file, "Choice: %d\n", choice);
+  311.                 fprintf(file, "Result: %.2lf\n", result);
+                       ^
+  312.                 fprintf(file, "---------------------\n");
+  313.                 fflush(file); // Flush buffer to ensure data is written immediately
+
+Found 4 issues
+                Issue Type(ISSUED_TYPE_ID): #
+              Resource Leak(RESOURCE_LEAK): 3
+  Uninitialized Value(UNINITIALIZED_VALUE): 1

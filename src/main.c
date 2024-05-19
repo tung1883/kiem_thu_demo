@@ -1,160 +1,319 @@
-/* main.c */
-
-/* Nuke: A program to completely wipe drives of its contents, by writing
- * zeroes and random bytes */
-
-/*
- *    Copyright (C) 2020 Jithin Renji
- *
- *    This file is part of Nuke.
- *
- *    Nuke is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    Nuke is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with Nuke.  If not, see <https://www.gnu.org/licenses/>.
- */
-
-#ifndef linux
-    #error "Nuke is currently only supported on Linux."
-#endif
-
 #include <stdio.h>
-#include <time.h>
+#include <stdbool.h>
 #include <stdlib.h>
-#include <string.h>
+#include "math.h"
 
-#include <getopt.h>
-
-#include "colors.h"
-#include "nuke.h"
-
-void usage(const char* progname);
-void version(const char* progname);
-
-
-int main(int argc, char** argv)
+void print_menu()
 {
-    if (argc < 2) {
-        usage(argv[0]);
-        exit(EXIT_FAILURE);
-    } else {
-        struct option long_opt[] = {
-            {"zero",        no_argument,            0, 'z'},
-            {"repeat",      required_argument,      0, 'n'},
-            {"yes",         no_argument,            0, 'Y'},
-            {"help",        no_argument,            0, 'h'},
-            {"version",     no_argument,            0, 'V'},
-            {0,             0,                      0,  0}
-        };
+    printf("===================================================================================================================================================================\n");
+    printf("| Arithmetic Operations | Trigonometric Functions | Exponential Functions | Numeric Algorithms         | Integral Functions          | Complex Functions          |\n");
+    printf("===================================================================================================================================================================\n");
+    printf("| 1 . Addition          | 12. Sine                | 15. Exponential       | 17. Absolute Difference    | 24. Integral of Square      | 29. Complex Addition       |\n");
+    printf("| 2 . Subtraction       | 13. Cosine              | 16. Logarithm         | 18. GCD                    | 25. Integral of Cube        | 30. Complex Subtraction    |\n");
+    printf("| 3 . Multiplication    | 14. Tangent             |                       | 19. Modular Exponentiation | 26. Integral of Sine        | 31. Complex Multiplication |\n");
+    printf("| 4 . Division          |                         |                       | 20. Modular Inverse        | 27. Integral of Cosine      | 32. Complex Division       |\n");
+    printf("| 5 . Factorial         |                         |                       | 21. Prime Factors          | 28. Integral of Exponential | 33. Complex Conjugate      |\n");
+    printf("| 6 . Square Root       |                         |                       | 22. Euler's Totient        |                             | 34. Complex Absolute       |\n");
+    printf("| 7 . Power             |                         |                       | 23. Chinese Remainder      |                             | 35. Get Previous History   |\n");
+    printf("| 8 . Absolute Value    |                         |                       |                            |                             |                            |\n");
+    printf("| 9 . Nearest Integer   |                         |                       |                            |                             |                            |\n");
+    printf("| 10. Maximum           |                         |                       |                            |                             |                            |\n");
+    printf("| 11. Minimum           |                         |                       |                            |                             |                            |\n");
+    printf("===================================================================================================================================================================\n");
+}
 
-        int opt_index = 0;
+// void display_cache_file()
+// {
+//     FILE *file = fopen("./src/cache.txt", "r");
+//     if (file == NULL)
+//     {
+//         fprintf(stderr, "Error opening file: cache.txt\n");
+//         return;
+//     }
 
-        int opt = 0;
+//     char c;
+//     while ((c = fgetc(file)) != EOF)
+//     {
+//         putchar(c);
+//     }
+// }
 
-        /* If set, don't write random bytes */
-        int only_zero = 0;
+int main()
+{
+    int choice;
+    double num1, num2, result;
+    int num, a, b, modulus;
+    char option[3]; // Change option to an array of characters to accommodate two-character inputs
+    Complex complex1, complex2, complexResult;
+    bool running = true;
+    bool listPrinted = false;
 
-        /* Number of times to repeat the procedure */
-        int nreps = 1;
+    FILE *file = fopen("./src/cache.txt", "a"); // Open file in append mode
 
-        /* If unset, don't ask for confirmation */
-        int ask_confirm = 1;
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error opening file: cache.txt\n");
+        return 1;
+    }
 
-        while ((opt = getopt_long(argc, argv, "z0n:YhV", long_opt,
-                &opt_index)) != -1) {
-            switch (opt) {
-            case '0':
-            case 'z':
-                only_zero = 1;
+    while (running)
+    {
+        if (!listPrinted)
+        {
+            print_menu();
+            listPrinted = true;
+        }
+
+        printf("Enter your choice (1-23) or 'q' to quit, 'l' to show the list: ");
+        scanf("%2s", option); // Read user's choice as a string with maximum length 2
+
+        if (option[0] == 'q' || option[0] == 'Q')
+        {
+            printf("Exiting...\n");
+            running = false;
+        }
+        else if (option[0] == 'l' || option[0] == 'L')
+        {
+            listPrinted = false;
+        }
+        else
+        {
+            choice = atoi(option); // Convert the string option to an integer
+
+            switch (choice)
+            {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                printf("4.Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                result = 0;
+                
+                if (choice == 1)
+                    result = add(num1, num2);
+                else if (choice == 2)
+                    result = subtract(num1, num2);
+                else if (choice == 3)
+                    result = multiply(num1, num2);
+                else if (choice == 4)
+                    result = divide(num1, num2);
+                printf("Result: %.2lf\n", result);
                 break;
-            case 'n':
-                nreps = atoi(optarg);
+            case 5:
+                printf("Enter a number: ");
+                scanf("%d", &num);
+                result = factorial(num);
+                printf("Result: %.2lf\n", result);
                 break;
-            case 'Y':
-                ask_confirm = 0;
+            case 6:
+                printf("Enter a number: ");
+                scanf("%lf", &num1);
+                result = squareRoot(num1);
+                printf("Result: %.2lf\n", result);
                 break;
-            case 'h':
-                usage(argv[0]);
-                exit(EXIT_SUCCESS);
+            case 7:
+                printf("Enter base and exponent: ");
+                scanf("%lf %lf", &num1, &num2);
+                result = power(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 8:
+                printf("Enter a number: ");
+                scanf("%lf", &num1);
+                result = absoluteValue(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 9:
+                printf("Enter a number: ");
+                scanf("%lf", &num1);
+                result = roundToNearestInteger(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 10:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                result = maximum(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 11:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                result = minimum(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 12:
+                printf("Enter a number (in radians): ");
+                scanf("%lf", &num1);
+                result = sine(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 13:
+                printf("Enter a number (in radians): ");
+                scanf("%lf", &num1);
+                result = cosine(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 14:
+                printf("Enter a number (in radians): ");
+                scanf("%lf", &num1);
+                result = tangent(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 15:
+                printf("Enter a number: ");
+                scanf("%lf", &num1);
+                result = exponential(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 16:
+                printf("Enter a number: ");
+                scanf("%lf", &num1);
+                result = naturalLogarithm(num1);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 17:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &num1, &num2);
+                result = absoluteDifference(num1, num2);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 18:
+                printf("18. Enter two numbers: ");
+                scanf("%d %d", &a, &b);
+                result = gcd(a, b);
+                printf("Result: %.2lf\n", result);
 
-            case 'V':
-                version(argv[0]);
-                exit(EXIT_SUCCESS);
+                break;
+            case 19:
+                printf("Enter base, exponent, and modulus: ");
+                scanf("%d %d %d", &a, &b, &modulus);
+                result = modular_exponentiation(a, b, modulus);
+                printf("Result: %.2lf\n", result);
 
-            case '?':
-                exit(EXIT_FAILURE);
+                break;
+            case 20:
+                printf("Enter number and modulus: ");
+                scanf("%d %d", &a, &modulus);
+                result = modular_inverse(a, modulus);
+                printf("Result: %.2lf\n", result);
+
+                break;
+            case 21:
+                printf("Enter a number: ");
+                scanf("%d", &num);
+                printf("Prime factors: ");
+                prime_factors(num);
+                printf("\n");
+                break;
+            case 22:
+                printf("Enter a number: ");
+                scanf("%d", &num);
+                result = euler_totient(num);
+                printf("Result: %.2lf\n", result);
+
+                break;
+            case 23:
+            {
+                printf("Enter the number of congruences: ");
+                scanf("%d", &num);
+                if (num > 0)
+                {
+                    int nums[100], rems[100];
+                    printf("Enter the modulus and remainders for each congruence:\n");
+                    for (int i = 0; i < num; i++)
+                    {
+                        printf("Modulus and remainder for congruence %d: ", i + 1);
+                        scanf("%d %d", &nums[i], &rems[i]);
+                    }
+                    result = chinese_remainder(nums, rems, num);
+                    printf("Result: %.2lf\n", result);
+                }
+                else
+                {
+                    printf("Invalid number of congruences\n");
+                }
+                break;
+            }
+            case 24:
+            case 25:
+            case 26:
+            case 27:
+            case 28:
+                printf("Enter lower bound, upper bound, and number of intervals: ");
+                scanf("%lf %lf %d", &num1, &num2, &num);
+                result = 0;
+                if (choice == 24)
+                    result = integrateSquare(num1, num2, num);
+                else if (choice == 25)
+                    result = integrateCube(num1, num2, num);
+                else if (choice == 26)
+                    result = integrateSine(num1, num2, num);
+                else if (choice == 27)
+                    result = integrateCosine(num1, num2, num);
+                else if (choice == 28)
+                    result = integrateExponential(num1, num2, num);
+                printf("Result: %.2lf\n", result);
+                break;
+            case 29:
+                printf("Enter real and imaginary parts of the first complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                printf("Enter real and imaginary parts of the second complex number: ");
+                scanf("%lf %lf", &complex2.real, &complex2.imag);
+                complexResult = complex_add(complex1, complex2);
+                printf("Result: %.2lf + %.2lfi\n", complexResult.real, complexResult.imag);
+                break;
+            case 30:
+                printf("Enter real and imaginary parts of the first complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                printf("Enter real and imaginary parts of the second complex number: ");
+                scanf("%lf %lf", &complex2.real, &complex2.imag);
+                complexResult = complex_subtract(complex1, complex2);
+                printf("Result: %.2lf + %.2lfi\n", complexResult.real, complexResult.imag);
+                break;
+            case 31:
+                printf("Enter real and imaginary parts of the first complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                printf("Enter real and imaginary parts of the second complex number: ");
+                scanf("%lf %lf", &complex2.real, &complex2.imag);
+                complexResult = complex_multiply(complex1, complex2);
+                printf("Result: %.2lf + %.2lfi\n", complexResult.real, complexResult.imag);
+                break;
+            case 32:
+                printf("Enter real and imaginary parts of the first complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                printf("Enter real and imaginary parts of the second complex number: ");
+                scanf("%lf %lf", &complex2.real, &complex2.imag);
+                complexResult = complex_divide(complex1, complex2);
+                printf("Result: %.2lf + %.2lfi\n", complexResult.real, complexResult.imag);
+                break;
+            case 33:
+                printf("Enter real and imaginary parts of the complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                complexResult = complex_conjugate(complex1);
+                printf("Result: %.2lf + %.2lfi\n", complexResult.real, complexResult.imag);
+                break;
+            case 34:
+                printf("Enter real and imaginary parts of the complex number: ");
+                scanf("%lf %lf", &complex1.real, &complex1.imag);
+                result = complex_abs(complex1);
+                printf("Result: %.2lf\n", result);
+                break;
+            // case 35:
+            //     display_cache_file();
+            //     break;
             default:
-                break;
+                printf("Invalid choice\n");
             }
-        }
 
-        char** drvs = argv + optind;
-
-        if (only_zero == 1 && argc < 3) {
-            printf("Please specify at least one drive.\n");
-            exit(EXIT_FAILURE);
-        }
-
-        printf("List of drives to be nuked:\n");
-
-        while (*drvs != NULL) {
-            printf(B_GREEN "\t%s\n" RESET, *drvs);
-            ++drvs;
-        }
-        printf("\n");
-        drvs = argv + optind;
-
-        srand(time(NULL));
-        while (*drvs != NULL) {
-            int ret = nuke(*drvs, only_zero, nreps, ask_confirm);
-            if (ret == -1) {
-                exit(EXIT_FAILURE);
-            }
-            ++drvs;
+            // if (choice >= 1 && choice <= 34) {
+            //     fprintf(file, "Choice: %d\n", choice);
+            //     fprintf(file, "Result: %.2lf\n", result);
+            //     fprintf(file, "---------------------\n");
+            //     fflush(file); // Flush buffer to ensure data is written immediately
+            // }
         }
     }
 
     return 0;
-}
-
-void usage(const char* progname)
-{
-    printf("Usage: %s <drive 1> [drive 2] ...\n\n", progname);
-
-    printf("Destroy the contents of a drive/drives.\n\n");
-
-    printf("Options:\n"
-           "\t-z, -0, --zero\tDon't write random bytes to drive\n"
-           "\t-n, --repeat\tNumber of times to repeat the process (defaults to 1)\n"
-           "\t-Y, --yes\tDon't ask for confirmation " B_WHITE "(NOT RECOMMENDED!)\n" RESET
-           "\t-h, --help\tDisplay this help and exit\n"
-           "\t-v, --version\tDisplay version information and exit\n\n"
-           "Examples:\n"
-           "\tnuke /dev/sdb\n"
-           "\tnuke /dev/sdb /dev/sdc\n"
-           "\tnuke -z /dev/sdb\n"
-           "\tnuke -n 2 /dev/sdb\n\n");
-
-    printf("NOTE: This program requires root privileges to run.\n");
-}
-
-void version(const char* progname)
-{
-    printf(
-"%s v0.1\n"
-"Copyright (C) 2020 Jithin Renji.\n"
-"License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n"
-"This is free software: you are free to change and redistribute it.\n"
-"There is NO WARRANTY, to the extent permitted by law.\n\n"
-
-"Written by Jithin Renji\n", progname
-    );
 }

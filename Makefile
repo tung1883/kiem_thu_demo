@@ -1,32 +1,14 @@
 CC = gcc
-CFLAGS = -Wall -g -std=gnu11
+CFLAGS = -Wall -Wextra -Werror
+LIBS = -lm
+SRC_DIR = ./src
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SRCS:.c=.o)
+TARGET = ./src/calculator
 
-INSTALL_PATH = /usr/local/bin
-BIN = nuke
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^ $(LIBS)
 
-OBJS = $(patsubst src/%.c,src/%.o,$(wildcard src/*.c))
-
-UI = ui/Nuke.ui
-PY = nuke_ui.py
-
-$(BIN): $(OBJS)
-	$(CC) $(CFLAGS) src/*.o -o $(BIN)
-
-src/%.o: src/%.c src/%.h
-	$(CC) $(CFLAGS) -c -o $@ $< $(CFLAGS)
-
-.PHONY: gui ui clean
-
-gui ui: $(BIN)
-	pyuic5 -x $(UI) -o $(PY)
-
-install:
-	install -m 755 $(BIN) $(INSTALL_PATH)/$(BIN)
-
-uninstall:
-	rm -f $(INSTALL_PATH)/$(BIN)
-
+.PHONY: clean
 clean:
-	rm -f $(BIN)
-	rm -f src/*.o
-	rm -f $(PY)
+	rm -f $(OBJS) $(TARGET)
